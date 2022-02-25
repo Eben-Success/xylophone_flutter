@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'dart:math';
 
 void main() {
   runApp(XylophoneApp());
@@ -11,6 +10,25 @@ class XylophoneApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    void playSound(int soundNum) {
+
+      final player = AudioCache();
+      player.play('note$soundNum.wav');
+    }
+
+    Expanded buildKey() {
+      return Expanded(
+        child: Container(
+          color: Colors.yellow,
+          child: TextButton(
+            onPressed: () {
+              playSound(1);
+            }, child: Text(''),
+          ),
+        ),
+      );
+    }
 
     return MaterialApp(
       home: Scaffold(
@@ -24,108 +42,17 @@ class XylophoneApp extends StatelessWidget {
                 ),),
           ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
-                color: Colors.yellow,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-
-                    // final AudioCache player = AudioCache();
-                    final player = AudioCache();
-
-                    player.play('note1.wav');
-                  }, child: Text(''),
-                ),
-              ),
-
-              Container(
-                color: Colors.blue,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-
-                    final player = AudioCache();
-                    player.play('note2.wav');
-                  },
-                  child: Text(''),
-                ),
-              ),
-
-              Container(
-                color: Colors.green,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-
-                    final player = AudioCache();
-                    player.play('note3.wav');
-                  },
-                  child: Text(''),
-                )
-              ),
-
-              Container(
-                color: Colors.purple,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    final player = AudioCache();
-                    player.play('note4.wav');
-                  },
-                  child: Text(''),
-                ),
-              ),
-
-              Container(
-                color: Colors.orange,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    final player = AudioCache();
-                    player.play('note5.wav');
-                  },
-                  child: Text(''),
-                ),
-              ),
-
-              Container(
-                color: Colors.teal,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-
-                    final player = AudioCache();
-                    player.play('note6.wav');
-                  },
-                  child: Text(''),
-
-                )
-              ),
-
-              Container(
-                color: Colors.brown,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    final player = AudioCache();
-                    player.play('note7.wav');
-                  },
-                  child: Text(''),
-                ),
-              )
-            ],
-          ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            buildKey(),
+            buildKey(),
+            buildKey(),
+            buildKey(),
+            buildKey(),
+            buildKey(),
+            buildKey(),
+          ],
         )
       )
     );
