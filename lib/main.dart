@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'dart:math';
 
-void main() {
-  runApp(XylophoneApp());
-}
+void main() => runApp(XylophoneApp());
+
 
 class XylophoneApp extends StatelessWidget {
   XylophoneApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    void playSound(int soundNum) {
+
+      final player = AudioCache();
+      player.play('note$soundNum.wav');
+    }
+
+    Expanded buildKey({required Color color, required int soundNum}) {
+      return Expanded(
+        child: Container(
+          color: color,
+          child: TextButton(
+            onPressed: () {
+              playSound(soundNum);
+            }, child: Text(''),
+          ),
+        ),
+      );
+    }
 
     return MaterialApp(
       home: Scaffold(
@@ -24,108 +41,17 @@ class XylophoneApp extends StatelessWidget {
                 ),),
           ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
-                color: Colors.yellow,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-
-                    // final AudioCache player = AudioCache();
-                    final player = AudioCache();
-
-                    player.play('note1.wav');
-                  }, child: Text(''),
-                ),
-              ),
-
-              Container(
-                color: Colors.blue,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-
-                    final player = AudioCache();
-                    player.play('note2.wav');
-                  },
-                  child: Text(''),
-                ),
-              ),
-
-              Container(
-                color: Colors.green,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-
-                    final player = AudioCache();
-                    player.play('note3.wav');
-                  },
-                  child: Text(''),
-                )
-              ),
-
-              Container(
-                color: Colors.purple,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    final player = AudioCache();
-                    player.play('note4.wav');
-                  },
-                  child: Text(''),
-                ),
-              ),
-
-              Container(
-                color: Colors.orange,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    final player = AudioCache();
-                    player.play('note5.wav');
-                  },
-                  child: Text(''),
-                ),
-              ),
-
-              Container(
-                color: Colors.teal,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-
-                    final player = AudioCache();
-                    player.play('note6.wav');
-                  },
-                  child: Text(''),
-
-                )
-              ),
-
-              Container(
-                color: Colors.brown,
-                height: 70.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    final player = AudioCache();
-                    player.play('note7.wav');
-                  },
-                  child: Text(''),
-                ),
-              )
-            ],
-          ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            buildKey(color: Colors.red, soundNum: 1),
+            buildKey(color: Colors.blue, soundNum: 2),
+            buildKey(color: Colors.yellow, soundNum: 3),
+            buildKey(color: Colors.purple, soundNum: 4),
+            buildKey(color: Colors.orange, soundNum: 5),
+            buildKey(color: Colors.green, soundNum: 6),
+            buildKey(color: Colors.indigo, soundNum: 7),
+          ],
         )
       )
     );
